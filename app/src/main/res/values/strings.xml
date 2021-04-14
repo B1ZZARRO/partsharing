@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">partsharing</string>
+    <string-array name="animals">
+        <item>Нежинская ул., 7</item>
+        <item>Нахимовский пр., 21</item>
+    </string-array>
+</resources>
