@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "943600386200",
+    "project_id": "partsharing-f1785",
+    "storage_bucket": "partsharing-f1785.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:943600386200:android:7338782597da84e6fa50ed",
+        "android_client_info": {
+          "package_name": "com.example.partsharing"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "943600386200-1a7eou25nsbikpntg1epk8ilusotvei7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCLPbhdTRDjmulFxiqdXUgcmaZbGKERpGo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "943600386200-1a7eou25nsbikpntg1epk8ilusotvei7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
