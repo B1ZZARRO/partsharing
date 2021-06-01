@@ -26,13 +26,46 @@
         android:layout_marginBottom="30dp"
         android:hint="Пароль"
         android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/edt_name"/>
+
+    <EditText
+        android:id="@+id/edt_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="80dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginBottom="30dp"
+        android:hint="Пароль"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/edt_lastname"/>
+
+    <EditText
+        android:id="@+id/edt_lastname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="80dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginBottom="30dp"
+        android:hint="Пароль"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/edt_patronymic"/>
+
+    <EditText
+        android:id="@+id/edt_patronymic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="80dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginBottom="30dp"
+        android:hint="Пароль"
+        android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/btn_signup"/>
 
     <Button
         android:id="@+id/btn_signup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="300dp"
         android:text="Зарегестрироваться"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

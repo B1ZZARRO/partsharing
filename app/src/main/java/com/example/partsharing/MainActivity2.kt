@@ -1,6 +1,7 @@
 package com.example.partsharing
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.graphics.Bitmap
@@ -13,6 +14,7 @@ class MainActivity2 : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main2)
+        loadData()
         img.setOnClickListener {
             val imageTakeIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
             startActivityForResult(imageTakeIntent,1)
@@ -25,5 +27,10 @@ class MainActivity2 : AppCompatActivity() {
             val bitmap = extras?.get("data") as Bitmap?
             img.setImageBitmap(bitmap)
         }
+    }
+    private  fun loadData() {
+        val sharedPreferences = getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
+        val savedString = sharedPreferences.getString("string_KEY", "")
+        txt_email.text = savedString!!
     }
 }
