@@ -4,16 +4,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.partsharing.ResponseBody.RestApiUser
 import com.example.partsharing.ResponseBody.UrlModelUser
-import kotlinx.android.synthetic.main.activity_main3.*
-import kotlinx.android.synthetic.main.activity_main3.btn_signup
-import kotlinx.android.synthetic.main.activity_main3.edt_login
-import kotlinx.android.synthetic.main.activity_main3.edt_password
+import kotlinx.android.synthetic.main.activity_reg.*
 
-class MainActivity3 : AppCompatActivity() {
+class RegActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main3)
+        setContentView(R.layout.activity_reg)
         btn_signup.setOnClickListener {
             addNewUser()
         }
@@ -32,9 +29,7 @@ class MainActivity3 : AppCompatActivity() {
             if (it?.userId != null) {
                 // it = newly added user parsed as response
                 // it?.id = newly added user ID
-            } else {
-                //Timber.d("Error registering new user")
-            }
+            } else { }
         }
     }
 }

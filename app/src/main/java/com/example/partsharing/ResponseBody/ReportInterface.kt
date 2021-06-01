@@ -14,6 +14,6 @@ interface ReportInterface {
 
     @POST("/api/Reports/RegReport")
     fun addReport(
-        @Body userData: UrlModelUser
+        @Body reportData: UrlModelReport
     ): Call<UrlModelReport>
 }
