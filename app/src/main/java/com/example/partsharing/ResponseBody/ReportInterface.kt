@@ -9,8 +9,8 @@ import retrofit2.http.Query
 interface ReportInterface {
     @GET("/api/Reports/")
     fun getReport(
-        @Query("reportId") reportId: Int,
-    ): Call<UrlModelReport>
+        //@Query("reportId") reportId: Int,
+    ): Call<List<UrlModelReport>>
 
     @POST("/api/Reports/RegReport")
     fun addReport(
