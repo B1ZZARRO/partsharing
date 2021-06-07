@@ -16,6 +16,9 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class AdminActivity : AppCompatActivity() {
+
+    var des : String = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_admin)
@@ -25,15 +28,9 @@ class AdminActivity : AppCompatActivity() {
     }
 
     private fun fillList(): List<String> {
-        val data = mutableListOf<String>()
-        (0..30).forEach { i -> data.add("${i} element") }
-        return data
-    }
-
-    private fun response() {
         val builder = Retrofit.Builder()
-            .baseUrl("https://partsharingreportsapi.azurewebsites.net")
-            .addConverterFactory(GsonConverterFactory.create())
+                .baseUrl("https://partsharingreportsapi.azurewebsites.net")
+                .addConverterFactory(GsonConverterFactory.create())
         val retrofit = builder.build()
         val reportInterface : ReportInterface = retrofit.create<ReportInterface>(ReportInterface::class.java)
         val call : Call<List<UrlModelReport>> = reportInterface.getReport()
@@ -43,7 +40,7 @@ class AdminActivity : AppCompatActivity() {
             }
             override fun onResponse(call: Call<List<UrlModelReport>>, response: Response<List<UrlModelReport>>) {
                 val statusResponse = response.body()!!
-                (0..20).forEach { i ->
+                /*(0..2).forEach { i ->
                     Log.i("TAGGetRep", "ID: ${statusResponse[i].reportId.toString()}")
                     Log.i("TAGGetRep", "Здание: ${statusResponse[i].building.toString()}")
                     Log.i("TAGGetRep", "Пара: ${statusResponse[i].lessonNumber.toString()}")
@@ -52,8 +49,16 @@ class AdminActivity : AppCompatActivity() {
                     Log.i("TAGGetRep", "ID: ${statusResponse[i].userID.toString()}")
                     Log.i("TAGGetRep", "Фамилия: ${statusResponse[i].userLastName.toString()}")
                     Log.i("TAGGetRep", "Имя: ${statusResponse[i].userFirstName.toString()}")
-                }
+                }*/
+
             }
         })
+        val data = mutableListOf<String>()
+        (0..2).forEach { i -> "Описание: ${statusResponse[i].description.toString()}" }
+        return data
+    }
+
+    private fun response() {
+
     }
 }
