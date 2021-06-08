@@ -23,9 +23,14 @@ class UserActivity : AppCompatActivity() {
         setContentView(R.layout.activity_user)
         loadData()
         btn_send.setOnClickListener {
-            addNewReport()
-            Toast.makeText(baseContext, "Ваш отчёт отправлен", Toast.LENGTH_SHORT).show()
-            startActivity(Intent(this@UserActivity,AuthActivity::class.java))
+            if (edt_cab.text.isNullOrEmpty() || edt_para.text.isNullOrEmpty() || edt_prob.text.isNullOrEmpty()) {
+                Toast.makeText(baseContext, "Не все поля заполнены", Toast.LENGTH_SHORT).show()
+            }
+            else {
+                addNewReport()
+                Toast.makeText(baseContext, "Ваш отчёт отправлен", Toast.LENGTH_SHORT).show()
+                startActivity(Intent(this@UserActivity,AuthActivity::class.java))
+            }
         }
         img.setOnClickListener {
             val imageTakeIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)

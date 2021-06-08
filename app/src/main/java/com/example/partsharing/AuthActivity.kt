@@ -14,6 +14,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.lang.Exception
 
 class AuthActivity : AppCompatActivity() {
 
@@ -41,34 +42,40 @@ class AuthActivity : AppCompatActivity() {
         val retrofit = builder.build()
         val userInterface : UserInterface = retrofit.create<UserInterface>(UserInterface::class.java)
         val call : retrofit2.Call<UrlModelUser> = userInterface.getUser(
-            edt_login.text.toString(),
+            edt_login1.text.toString(),
             edt_password.text.toString()
         )
         call.enqueue(object : Callback<UrlModelUser> {
             override fun onFailure(call: retrofit2.Call<UrlModelUser>, t: Throwable) {
                 Log.i("TAGGetUserFail", t.message.toString())
-                Toast.makeText(baseContext,"Неверный логин или пароль", Toast.LENGTH_SHORT).show()
+                Toast.makeText(baseContext,"Ответ от API не получен", Toast.LENGTH_SHORT).show()
             }
 
             override fun onResponse(call: Call<UrlModelUser>, response: Response<UrlModelUser>) {
-                val statusResponse = response.body()!!
-                lastName1 = statusResponse.lastName.toString()
-                name1 = statusResponse.firstName.toString()
-                patronymic1 = statusResponse.patronymic.toString()
-                userid = statusResponse.userId!!
-                role = statusResponse.role.toString()
-                if (role == "User") {
-                    saveData()
-                    startActivity(Intent(this@AuthActivity,UserActivity::class.java))
+                try {
+                    val statusResponse = response.body()!!
+                    lastName1 = statusResponse.lastName.toString()
+                    name1 = statusResponse.firstName.toString()
+                    patronymic1 = statusResponse.patronymic.toString()
+                    userid = statusResponse.userId!!
+                    role = statusResponse.role.toString()
+                    if (role == "User") {
+                        saveData()
+                        startActivity(Intent(this@AuthActivity,UserActivity::class.java))
+                    }
+                    if (role == "Admin") {
+                        startActivity(Intent(this@AuthActivity,AdminActivity::class.java))
+                    }
+                    Log.i("TAGGetUser", "onResponse: ${statusResponse.userId}")
+                    Log.i("TAGGetUser", "onResponse: ${statusResponse.lastName.toString()}")
+                    Log.i("TAGGetUser", "onResponse: ${statusResponse.firstName.toString()}")
+                    Log.i("TAGGetUser", "onResponse: ${statusResponse.patronymic.toString()}")
+                    Log.i("TAGGetUser", "onResponse: ${statusResponse.role.toString()}")
                 }
-                if (role == "Admin") {
-                    startActivity(Intent(this@AuthActivity,AdminActivity::class.java))
+                catch (E:Exception) {
+                    Toast.makeText(baseContext, "Неверный логин или пароль", Toast.LENGTH_SHORT).show()
                 }
-                Log.i("TAGGetUser", "onResponse: ${statusResponse.userId.toString()}")
-                Log.i("TAGGetUser", "onResponse: ${statusResponse.lastName.toString()}")
-                Log.i("TAGGetUser", "onResponse: ${statusResponse.firstName.toString()}")
-                Log.i("TAGGetUser", "onResponse: ${statusResponse.patronymic.toString()}")
-                Log.i("TAGGetUser", "onResponse: ${statusResponse.role.toString()}")
+
             }
         })
     }

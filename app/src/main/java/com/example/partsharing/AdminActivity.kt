@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.partsharing.Recycler.CustomRecyclerAdapter
 import com.example.partsharing.ResponseBody.ReportInterface
 import com.example.partsharing.ResponseBody.UrlModelReport
@@ -23,11 +22,10 @@ class AdminActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_admin)
         recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = CustomRecyclerAdapter(fillList())
         response()
     }
 
-    private fun fillList(): List<String> {
+    private fun response() {
         val builder = Retrofit.Builder()
                 .baseUrl("https://partsharingreportsapi.azurewebsites.net")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -40,7 +38,11 @@ class AdminActivity : AppCompatActivity() {
             }
             override fun onResponse(call: Call<List<UrlModelReport>>, response: Response<List<UrlModelReport>>) {
                 val statusResponse = response.body()!!
-                /*(0..2).forEach { i ->
+                val linearLayoutManager:LinearLayoutManager = LinearLayoutManager(applicationContext)
+                linearLayoutManager.orientation = LinearLayoutManager.VERTICAL
+                recyclerView.layoutManager = linearLayoutManager
+                recyclerView.adapter = CustomRecyclerAdapter(statusResponse)
+                (0..statusResponse.size - 1).forEach { i ->
                     Log.i("TAGGetRep", "ID: ${statusResponse[i].reportId.toString()}")
                     Log.i("TAGGetRep", "Здание: ${statusResponse[i].building.toString()}")
                     Log.i("TAGGetRep", "Пара: ${statusResponse[i].lessonNumber.toString()}")
@@ -49,16 +51,9 @@ class AdminActivity : AppCompatActivity() {
                     Log.i("TAGGetRep", "ID: ${statusResponse[i].userID.toString()}")
                     Log.i("TAGGetRep", "Фамилия: ${statusResponse[i].userLastName.toString()}")
                     Log.i("TAGGetRep", "Имя: ${statusResponse[i].userFirstName.toString()}")
-                }*/
+                }
 
             }
         })
-        val data = mutableListOf<String>()
-        (0..2).forEach { i -> "Описание: ${statusResponse[i].description.toString()}" }
-        return data
-    }
-
-    private fun response() {
-
     }
 }
